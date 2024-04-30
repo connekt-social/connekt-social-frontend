@@ -7,6 +7,8 @@ import { ReactNode, useContext } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import {
+  Interpolation,
+  Theme,
   ThemeProvider,
   createTheme,
   responsiveFontSizes,
@@ -49,7 +51,9 @@ const ThemeComponent = (props: Props) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <GlobalStyles styles={() => GlobalStyling(theme) as any} />
+      <GlobalStyles
+        styles={() => GlobalStyling(theme) as Interpolation<Theme>}
+      />
       {children}
     </ThemeProvider>
   );

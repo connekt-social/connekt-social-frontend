@@ -2,6 +2,14 @@
 import { PaletteMode, PaletteOptions } from "@mui/material";
 
 export type CustomColorsType = "pink" | "yellow" | "orange" | "green";
+export type AllColorsType =
+  | CustomColorsType
+  | "primary"
+  | "secondary"
+  | "info"
+  | "warning"
+  | "error"
+  | "success";
 export type CustomColorsPropsOverrides = {
   pink: true;
   yellow: true;

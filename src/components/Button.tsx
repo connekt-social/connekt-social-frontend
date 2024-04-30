@@ -34,7 +34,8 @@ export const Button = ({
       ...rest,
     }}
     sx={{
-      ...(variant === "contained" && shadowHighlight
+      ...((variant === "contained" || variant === "containedLight") &&
+      shadowHighlight
         ? {
             boxShadow: (theme) =>
               `0px 4px 8px -4px ${theme.palette[!color || color === "inherit" ? "primary" : color].main}`,

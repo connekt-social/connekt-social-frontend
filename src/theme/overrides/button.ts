@@ -1,5 +1,6 @@
 // ** MUI Imports
 import { Theme } from "@mui/material/styles";
+import { AllColorsType } from "../palette";
 
 const Button = (theme: Theme): Theme["components"] => {
   return {
@@ -38,8 +39,28 @@ const Button = (theme: Theme): Theme["components"] => {
           },
         },
       },
+      variants: (Object.keys(theme.palette) as AllColorsType[]).map(
+        (color) => ({
+          props: { variant: "containedLight", color },
+          style: {
+            backgroundColor: theme.palette[color ?? "primary"].light,
+            color: theme.palette[color ?? "primary"].main,
+            boxShadow: theme.shadows[3],
+            "&:hover": {
+              boxShadow: theme.shadows[3],
+              backgroundColor: theme.palette[color ?? "primary"].light + "aa",
+            },
+          },
+        })
+      ),
     },
   };
 };
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    containedLight: true;
+  }
+}
 
 export default Button;

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { SettingsProvider } from "./SettingsContext";
 import ThemeComponent from "../theme/ThemeComponent";
+import CoolSnackbar from "../components/CoolSnackbar";
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +9,10 @@ type Props = {
 const MasterProvider: FC<Props> = ({ children }) => {
   return (
     <SettingsProvider>
-      <ThemeComponent>{children}</ThemeComponent>
+      <ThemeComponent>
+        {children}
+        <CoolSnackbar />
+      </ThemeComponent>
     </SettingsProvider>
   );
 };
