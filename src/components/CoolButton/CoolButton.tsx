@@ -1,4 +1,4 @@
-import { CustomColorsPropsOverrides } from "../theme/palette";
+import { CustomColorsPropsOverrides } from "../../theme/palette";
 import {
   Button as MuiButton,
   ButtonProps as MuiButtonProps,
@@ -18,9 +18,10 @@ declare module "@mui/material/Button" {
 export interface ButtonProps extends ButtonBaseProps {
   children?: ReactNode | ReactNode[];
   shadowHighlight?: boolean;
+  variant?: "contained" | "containedLight" | "outlined" | "text";
 }
 
-export const Button = ({
+const CoolButton = ({
   children,
   color,
   shadowHighlight,
@@ -51,3 +52,5 @@ export const Button = ({
     {children}
   </MuiButton>
 );
+
+export default CoolButton;

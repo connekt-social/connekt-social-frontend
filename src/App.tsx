@@ -1,21 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import MasterProvider from "./context/MasterProvider";
-import LoginPage from "./pages/login";
+import AppRouter from "./pages/router";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!</div>,
-  },
-  {
-    path: "login",
-    element: <LoginPage />,
-  },
-]);
 function App() {
   return (
     <MasterProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </MasterProvider>
   );
 }

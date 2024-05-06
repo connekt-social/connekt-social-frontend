@@ -12,7 +12,7 @@ import {
 import loginBackground from "../../assets/images/loginBackground.svg";
 import loginImage from "../../assets/images/loginImage.svg";
 import Image from "../../components/Image";
-import { Button } from "../../components/Button";
+import CoolButton from "../../components/CoolButton/CoolButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../utils/apiClient";
@@ -143,9 +143,9 @@ const LoginPage = () => {
                 control={<Checkbox defaultChecked />}
                 label="Remember me"
               />
-              <Button>Forgot password?</Button>
+              <CoolButton>Forgot password?</CoolButton>
             </Stack>
-            <Button
+            <CoolButton
               shadowHighlight={true}
               variant="contained"
               color="primary"
@@ -156,8 +156,8 @@ const LoginPage = () => {
               disabled={loading}
             >
               {isNewUser ? "Create Account" : "Login"}
-            </Button>
-            <Button
+            </CoolButton>
+            <CoolButton
               shadowHighlight={false}
               variant="containedLight"
               color="primary"
@@ -171,7 +171,7 @@ const LoginPage = () => {
               {isNewUser
                 ? "Log in with an existing account"
                 : "Create a new Account"}
-            </Button>
+            </CoolButton>
           </Stack>
           <Stack
             sx={{

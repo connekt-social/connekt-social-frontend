@@ -86,6 +86,7 @@ const DefaultPalette = (mode: PaletteMode): PaletteOptions => {
       dark: "#234907",
       contrastText: "#FFF",
     },
+
     grey: {
       50: "#FAFAFA",
       100: "#F5F5F5",
