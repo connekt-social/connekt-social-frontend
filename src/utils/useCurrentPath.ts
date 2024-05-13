@@ -18,7 +18,7 @@ const useCurrentPath = () => {
 
   console.log("current path result", result);
 
-  return result?.[0]?.route.path;
+  return result?.[result?.length - 1]?.route.path;
 };
 
 export default useCurrentPath;

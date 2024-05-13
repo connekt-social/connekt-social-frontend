@@ -1,5 +1,5 @@
 import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { NavContext } from "../../context/NavContext";
 import NavButton from "../NavButton/NavButton";
 import { NavMenuItem } from "../../navigation/navMenu";
@@ -10,6 +10,10 @@ const SideNav: FC = () => {
   const { navMenu } = useContext(NavContext);
 
   const pathname = useCurrentPath();
+
+  useEffect(() => {
+    console.log("Current Path: ", pathname);
+  }, [pathname]);
 
   return (
     <>

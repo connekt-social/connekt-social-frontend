@@ -26,6 +26,7 @@ const PageContainer: FC<Props> = ({ title, children }) => {
       <Stack
         sx={{
           px: 8,
+          pt: 2,
         }}
       >
         {children}

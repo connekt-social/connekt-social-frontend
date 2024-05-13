@@ -1,5 +1,5 @@
 const ThemeConstants = {
-  topNavHeight: 48 + 45,
+  topNavHeight: 48 + 32,
 };
 
 export default ThemeConstants;

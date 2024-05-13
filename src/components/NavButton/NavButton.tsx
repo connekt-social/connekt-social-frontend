@@ -14,29 +14,32 @@ const NavButton: FC<Props> = ({ icon, iconSrc, selected, href, title }) => {
       component={"a"}
       direction={"row"}
       sx={{
-        bgcolor: selected ? "primary.light" : "transparent",
+        bgcolor: selected ? "primary.main" : "transparent",
+        color: (theme) => (selected ? "white" : theme.palette.text.primary),
         width: "100%",
         // boxShadow: selected ? 1 : 0,
         p: 2,
         "&:hover": {
-          bgcolor: (theme) => theme.palette.primary.light + "77",
-          boxShadow: 2,
+          bgcolor: (theme) => theme.palette.primary.light + "aa",
+          color: (theme) => theme.palette.primary.main,
+          // boxShadow: 2,
         },
         "&:active": {
           bgcolor: (theme) => theme.palette.primary.main + "44",
-          boxShadow: 3,
+          // boxShadow: 3,
         },
         borderRadius: 1,
         textDecoration: "none",
         transition: "all 0.2s ease-in-out",
         userSelect: "none",
-        color: (theme) => theme.palette.text.primary,
       }}
       href={href}
       spacing={2}
     >
       {iconSrc ? <Box component={"img"} src={iconSrc} alt="icon" /> : icon}
-      <Typography fontWeight={500}>{title}</Typography>
+      <Typography fontWeight={500} color="inherit">
+        {title}
+      </Typography>
     </Stack>
   );
 };

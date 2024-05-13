@@ -13,7 +13,7 @@ export type DefaultApiError = {
 apiClient.interceptors.response.use(
   undefined,
   (error: AxiosError<DefaultApiError>) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && error.config?.url !== "/auth/login") {
       toast({
         message: "Session expired, please login again",
         severity: "warning",
