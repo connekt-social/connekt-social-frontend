@@ -1,11 +1,15 @@
 import PageContainer from "../../components/PageContainer/PageContainer";
-import ContentCard from "../../components/ContentCard/ContentCard";
+import ContentCard from "../../components/Content/ContentCard/ContentCard";
 import dayjs from "dayjs";
 import { Button, Grid, Stack, TextField } from "@mui/material";
 import DateLine from "../../components/DateLine/DateLine";
 import { Add } from "@mui/icons-material";
+import ContentUploadDialog from "../../components/Content/ContentUploadDialog/ContentUploadDialog";
+import { useState } from "react";
 
 const ContentPage = () => {
+  const [contentUploadDialogOpen, setContentUploadDialogOpen] = useState(false);
+
   return (
     <PageContainer title="Content">
       <Grid container spacing={6}>
@@ -20,7 +24,14 @@ const ContentPage = () => {
                 maxWidth: "300px",
               }}
             />
-            <Button variant="contained" color="primary" startIcon={<Add />}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<Add />}
+              onClick={() => {
+                setContentUploadDialogOpen(true);
+              }}
+            >
               Upload
             </Button>
           </Stack>
@@ -68,6 +79,10 @@ const ContentPage = () => {
           />
         </Grid>
       </Grid>
+      <ContentUploadDialog
+        open={contentUploadDialogOpen}
+        setOpen={setContentUploadDialogOpen}
+      />
     </PageContainer>
   );
 };

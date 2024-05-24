@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ContentCard from "../../components/ContentCard/ContentCard";
+import ContentCard from "../../components/Content/ContentCard/ContentCard";
 import dayjs from "dayjs";
 import imageSrc from "../../stories/assets/figma-plugin.png";
 
