@@ -20,7 +20,7 @@ export type ContentCardProps = {
   scheduleDate?: string | Date | Dayjs;
   itemID: string;
   itemType: string;
-  size: "portrait" | "landscape" | "square";
+  size: "PORTRAIT" | "LANDSCAPE" | "SQUARE";
   sx?: SxProps;
   offsetX?: number;
   offsetY?: number;
@@ -34,19 +34,19 @@ const ContentCard: FC<ContentCardProps> = ({
   scheduleDate,
   description,
   itemType,
-  size = "square",
+  size = "SQUARE",
   sx,
 }) => {
   const aspectRatio: SxProps = useMemo(() => {
     switch (size) {
-      case "portrait":
+      case "PORTRAIT":
         return {
           // width: "33.33%",
           // aspectRatio: "1/2",
           gridColumn: "span 1",
           gridRow: "span 2",
         };
-      case "landscape":
+      case "LANDSCAPE":
         return {
           // width: "66.66%",
           // aspectRatio: "2/1",
@@ -54,7 +54,7 @@ const ContentCard: FC<ContentCardProps> = ({
           gridRow: "span 1",
         };
 
-      case "square":
+      case "SQUARE":
       default:
         return {
           // width: "33.33",
@@ -184,7 +184,7 @@ const ContentCard: FC<ContentCardProps> = ({
                   <Typography variant="h6" color="text.primary">
                     {title}
                   </Typography>
-                  {(size === "landscape" || !imageSrc) && (
+                  {(size === "LANDSCAPE" || !imageSrc) && (
                     <Typography
                       color="text.secondary"
                       sx={{

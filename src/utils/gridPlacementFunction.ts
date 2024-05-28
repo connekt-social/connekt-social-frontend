@@ -1,4 +1,4 @@
-export type DynamicGridSizes = "square" | "portrait" | "landscape";
+export type DynamicGridSizes = "SQUARE" | "PORTRAIT" | "LANDSCAPE";
 
 const gridPlacementFunction = <
   T extends {
@@ -18,7 +18,7 @@ const gridPlacementFunction = <
   for (const elem of newElements) {
     const space = [0, 0];
     switch (elem.size) {
-      case "square":
+      case "SQUARE":
         for (let i = 0; i < matrix.length; i++) {
           space[1] = matrix[i].findIndex((_, j) => {
             // console.log(elem, "j is ", j, matrix[i][j]);
@@ -36,7 +36,7 @@ const gridPlacementFunction = <
         }
         matrix[space[0]][space[1]] = "s";
         break;
-      case "portrait":
+      case "PORTRAIT":
         for (let i = 0; i < matrix.length; i++) {
           space[1] = matrix[i].findIndex((_, j) => {
             if (!matrix[i + 1]) {
@@ -56,7 +56,7 @@ const gridPlacementFunction = <
         // console.log("adding");
 
         break;
-      case "landscape":
+      case "LANDSCAPE":
         for (let i = 0; i < matrix.length; i++) {
           space[1] = matrix[i].findIndex((_, j) => {
             if (j < 2) {

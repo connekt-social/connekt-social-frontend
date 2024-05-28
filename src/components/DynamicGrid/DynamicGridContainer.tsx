@@ -38,20 +38,20 @@ const DynamicGridContainer = <
       {propList.map((content) => {
         let sizes: SxProps = {};
         switch (content.size) {
-          case "portrait":
+          case "PORTRAIT":
             sizes = {
               gridColumn: "span 1",
               gridRow: "span 2",
             };
             break;
-          case "landscape":
+          case "LANDSCAPE":
             sizes = {
               gridColumn: "span 2",
               gridRow: "span 1",
             };
             break;
 
-          case "square":
+          case "SQUARE":
           default:
             sizes = {
               gridColumn: "span 1",

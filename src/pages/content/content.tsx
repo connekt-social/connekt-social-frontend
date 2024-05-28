@@ -19,7 +19,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "portrait",
+    size: "PORTRAIT",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -31,7 +31,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "square",
+    size: "SQUARE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -43,7 +43,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "square",
+    size: "SQUARE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -55,7 +55,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "landscape",
+    size: "LANDSCAPE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -67,7 +67,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "landscape",
+    size: "LANDSCAPE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -79,7 +79,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "square",
+    size: "SQUARE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -91,7 +91,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "square",
+    size: "SQUARE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -103,7 +103,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "landscape",
+    size: "LANDSCAPE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -115,7 +115,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "square",
+    size: "SQUARE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },
@@ -127,7 +127,7 @@ const sampleContent: ContentCardProps[] = [
     updatedAt: dayjs(),
     description:
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit. `.repeat(20),
-    size: "square",
+    size: "SQUARE",
     // imageSrc: "https://via.placeholder.com/150",
     scheduleDate: dayjs(),
   },

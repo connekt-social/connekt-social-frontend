@@ -1,6 +1,8 @@
 import { Close } from "@mui/icons-material";
 import {
   AppBar,
+  Button,
+  CircularProgress,
   Container,
   Dialog,
   Fade,
@@ -12,13 +14,49 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import ContentTypeSelector from "../ContentTypeSelector/ContentTypeSelector";
+import {
+  ContentType,
+  getContentTypes,
+} from "../../../api/content/getContentTypes";
+import ContentUploadForm from "../ContentUploadForm/ContentUploadForm";
+import ContentDataView from "../ContentDataView/ContentDataView";
+import { uploadContentItem } from "../../../api/content/uploadContentItem";
+import dayjs from "dayjs";
 
 type Props = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
+  const [contentType, setContentType] = useState<ContentType | null>(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const [contentTypes, setContentTypes] = useState<ContentType[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [formData, setFormData] = useState<any>({});
+  const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    getContentTypes().then(setContentTypes).catch(console.error);
+  }, []);
+
+  const handleUpload = async () => {
+    if (!contentType) return;
+    setUploading(true);
+    try {
+      await uploadContentItem({
+        contentTypeId: contentType?.id,
+        data: formData,
+        title:
+          formData.title ?? `${dayjs().format("YYYY-MM-DD HH:mm:ss")} Upload`,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    setUploading(false);
+  };
+
   return (
     <Dialog open={open} onClose={() => setOpen(false)} fullScreen>
       <Stack
@@ -52,7 +90,7 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
         </AppBar>
         <Container maxWidth="lg">
           <Stack spacing={4}>
-            <Stepper>
+            <Stepper activeStep={activeStep}>
               <Step>
                 <StepLabel>Choose content type</StepLabel>
               </Step>
@@ -63,9 +101,84 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
                 <StepLabel>Review and Submit</StepLabel>
               </Step>
             </Stepper>
-            <Fade in>
-              <Typography variant="h6">Choose content type</Typography>
-            </Fade>
+            {activeStep === 0 && (
+              <Fade in>
+                <Stack spacing={4}>
+                  <Typography variant="h6">Choose content type</Typography>
+                  <ContentTypeSelector
+                    contentTypes={contentTypes}
+                    onContentTypeSelect={(contentType) => {
+                      console.log("onContentTypeSelect");
+                      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                      setContentType(contentType);
+                    }}
+                  />
+                </Stack>
+              </Fade>
+            )}
+            {activeStep === 1 && (
+              <Fade in>
+                <Stack spacing={4}>
+                  <Typography variant="h6">Enter Details</Typography>
+                  {contentType ? (
+                    contentType.schema ? (
+                      <ContentUploadForm
+                        schema={contentType?.schema}
+                        uiSchema={contentType?.uiSchema}
+                        onSubmit={(data) => {
+                          console.log("contentUploadForm submitted", data);
+                          setFormData(data.formData);
+                          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+                        }}
+                      />
+                    ) : (
+                      <Typography variant="body1">
+                        Content type is currently unsupported
+                      </Typography>
+                    )
+                  ) : (
+                    <Typography variant="body1">
+                      Please select a content type
+                    </Typography>
+                  )}
+                </Stack>
+              </Fade>
+            )}
+            {activeStep === 2 && (
+              <Fade in>
+                <Stack spacing={4}>
+                  <Typography variant="h6">Review and Submit</Typography>
+                  <ContentDataView data={formData} />
+                  <Button
+                    onClick={() => {
+                      handleUpload();
+                    }}
+                    sx={{
+                      width: "fit-content",
+                    }}
+                    variant="contained"
+                    disabled={uploading}
+                    startIcon={uploading && <CircularProgress size={16} />}
+                  >
+                    Submit
+                  </Button>
+                </Stack>
+              </Fade>
+            )}
+            {activeStep > 0 && (
+              <Button
+                onClick={() => {
+                  setActiveStep((prevActiveStep) => prevActiveStep - 1);
+                }}
+                sx={{
+                  width: "fit-content",
+                }}
+                size="small"
+                variant="outlined"
+              >
+                Back
+              </Button>
+            )}
           </Stack>
         </Container>
       </Stack>
