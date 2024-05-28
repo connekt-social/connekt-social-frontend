@@ -38,7 +38,7 @@ export const Default: Story = {
     updatedAt: "2022-02-02",
     createdAt: "2022-02-02",
     scheduleDate: "2022-02-02",
-    size: "large",
+    size: "portrait",
     itemType: "Type",
     itemID: "1",
   },
