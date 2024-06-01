@@ -23,7 +23,6 @@ import {
 import ContentUploadForm from "../ContentUploadForm/ContentUploadForm";
 import ContentDataView from "../ContentDataView/ContentDataView";
 import { uploadContentItem } from "../../../api/content/uploadContentItem";
-import dayjs from "dayjs";
 
 type Props = {
   open: boolean;
@@ -48,8 +47,6 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
       await uploadContentItem({
         contentTypeId: contentType?.id,
         data: formData,
-        title:
-          formData.title ?? `${dayjs().format("YYYY-MM-DD HH:mm:ss")} Upload`,
       });
     } catch (error) {
       console.error(error);

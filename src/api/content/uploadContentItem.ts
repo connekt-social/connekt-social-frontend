@@ -5,7 +5,6 @@ export type ContentItemUploadParams = {
   teamId?: number;
   contentTypeId: number;
   data: Record<string, unknown>;
-  title: string;
   size?: DynamicGridSizes;
 };
 export const uploadContentItem = async (data: ContentItemUploadParams) => {

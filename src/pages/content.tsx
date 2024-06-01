@@ -1,14 +1,14 @@
-import PageContainer from "../../components/PageContainer/PageContainer";
+import PageContainer from "../components/PageContainer/PageContainer";
 import ContentCard, {
   ContentCardProps,
-} from "../../components/Content/ContentCard/ContentCard";
+} from "../components/Content/ContentCard/ContentCard";
 import dayjs from "dayjs";
-import { Button, Container, Stack, TextField } from "@mui/material";
-import DateLine from "../../components/DateLine/DateLine";
+import { Button, Stack, TextField } from "@mui/material";
+import DateLine from "../components/DateLine/DateLine";
 import { Add } from "@mui/icons-material";
-import ContentUploadDialog from "../../components/Content/ContentUploadDialog/ContentUploadDialog";
+import ContentUploadDialog from "../components/Content/ContentUploadDialog/ContentUploadDialog";
 import { useState } from "react";
-import DynamicGridContainer from "../../components/DynamicGrid/DynamicGridContainer";
+import DynamicGridContainer from "../components/DynamicGrid/DynamicGridContainer";
 
 const sampleContent: ContentCardProps[] = [
   {
@@ -139,43 +139,37 @@ const ContentPage = () => {
 
   return (
     <PageContainer title="Content">
-      <Stack direction="row" spacing={4}>
-        <TextField
-          label="Search Content"
-          variant="outlined"
-          fullWidth
-          size="small"
-          sx={{
-            maxWidth: "300px",
-          }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<Add />}
-          onClick={() => {
-            setContentUploadDialogOpen(true);
-          }}
-        >
-          Upload
-        </Button>
-      </Stack>
-      <Container maxWidth="lg">
-        <DateLine
-          date="May 2024"
-          sx={{
-            mt: 4,
-          }}
-        />
+      <Stack
+        spacing={6}
+        sx={{
+          pb: 6,
+        }}
+      >
+        <Stack direction="row" spacing={4}>
+          <TextField
+            label="Search Content"
+            variant="outlined"
+            fullWidth
+            size="small"
+            sx={{
+              maxWidth: "300px",
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<Add />}
+            onClick={() => {
+              setContentUploadDialogOpen(true);
+            }}
+          >
+            Upload
+          </Button>
+        </Stack>
+        <DateLine date="May 2024" />
 
-        <DynamicGridContainer
-          Component={ContentCard}
-          propList={components}
-          sx={{
-            my: 4,
-          }}
-        />
-      </Container>
+        <DynamicGridContainer Component={ContentCard} propList={components} />
+      </Stack>
       <ContentUploadDialog
         open={contentUploadDialogOpen}
         setOpen={setContentUploadDialogOpen}

@@ -21,16 +21,17 @@ const DynamicGridContainer = <
   const [gridHeight, setGridHeight] = useState(3);
 
   useEffect(() => {
-    const { matrix } = gridPlacementFunction(propList, 3, 3);
+    const { matrix } = gridPlacementFunction(propList, 3, 4);
+    console.log(matrix);
     setGridHeight(matrix.length);
   }, [propList]);
   return (
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
+        gridTemplateColumns: "repeat(4, 1fr)",
         gridTemplateRows: (theme) =>
-          `repeat(${gridHeight}, ${theme.breakpoints.values.lg / 3}px)`,
+          `repeat(${gridHeight}, ${theme.breakpoints.values.lg / 4}px)`,
         gap: (theme) => theme.spacing(spacing ?? 6),
         ...sx,
       }}

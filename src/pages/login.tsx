@@ -9,14 +9,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import loginBackground from "../../assets/images/loginBackground.svg";
-import loginImage from "../../assets/images/loginImage.svg";
-import Image from "../../components/Image";
-import CoolButton from "../../components/CoolButton/CoolButton";
+import loginBackground from "./../assets/images/loginBackground.svg";
+import loginImage from "./../assets/images/loginImage.svg";
+import Image from "../components/Image";
+import CoolButton from "../components/CoolButton/CoolButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import apiClient from "../../utils/apiClient";
-import { toast } from "../../utils/toast";
+import apiClient from "../utils/apiClient";
+import { toast } from "../utils/toast";
 
 const LoginPage = () => {
   const [isNewUser, setIsNewUser] = useState(false);

@@ -3,6 +3,7 @@ import DashboardLayout from "./dashboard/layout";
 import LoginPage from "./login";
 import { useContext } from "react";
 import { NavContext } from "../context/NavContext";
+import PluginPage from "./plugins/pluginPage";
 
 const AppRouter = () => {
   const { routes } = useContext(NavContext);
@@ -10,7 +11,16 @@ const AppRouter = () => {
     {
       path: "/",
       element: <DashboardLayout />,
-      children: routes,
+      children: [
+        //Routes that are visible in the sidebar
+        ...routes,
+
+        //Routes that are not visible in the sidebar
+        {
+          path: "/plugins/:id",
+          element: <PluginPage />,
+        },
+      ],
     },
     {
       path: "login",

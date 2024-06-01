@@ -1,6 +1,8 @@
-import { Archive, Home } from "@mui/icons-material";
+import { Archive, Extension, Home } from "@mui/icons-material";
 import { ReactNode } from "react";
-import ContentPage from "../pages/content/content";
+import ContentPage from "../pages/content";
+import PluginsPage from "../pages/plugins";
+import HomePage from "../pages/home";
 
 export type NavMenuItem = {
   path: string;
@@ -18,12 +20,19 @@ const getNavMenu = async (): Promise<NavItem[]> => {
       icon: <Home />,
       path: "/",
       label: "Home",
+      staticComponent: <HomePage />,
     },
     {
       icon: <Archive />,
       path: "/content",
       label: "Content",
       staticComponent: <ContentPage />,
+    },
+    {
+      icon: <Extension />,
+      path: "/plugins",
+      label: "Plugins",
+      staticComponent: <PluginsPage />,
     },
   ];
 };
