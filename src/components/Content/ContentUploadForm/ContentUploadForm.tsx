@@ -3,6 +3,7 @@ import { RJSFSchema, UiSchema } from "@rjsf/utils";
 import { FC } from "react";
 import validator from "@rjsf/validator-ajv8";
 import { IChangeEvent } from "@rjsf/core";
+import widgets from "../../Widgets";
 
 type Props = {
   schema: RJSFSchema;
@@ -33,6 +34,7 @@ const ContentUploadForm: FC<Props> = ({ schema, uiSchema, onSubmit }) => {
               console.log("contentUploadForm submitted", data);
             }
       }
+      widgets={widgets}
     />
   );
 };
