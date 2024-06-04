@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import PageContainer from "../../components/PageContainer/PageContainer";
 import {
   Box,
@@ -13,11 +13,18 @@ import { PluginDetails, getPlugin } from "../../api/plugins/getPlugins";
 import { useParams, useSearchParams } from "react-router-dom";
 import { toast } from "../../utils/toast";
 import PluginSettingsForm from "../../components/Plugins/PluginSettingsForm/PluginSettingsForm";
+import {
+  FrontendComponent,
+  getFrontendComponents,
+} from "../../api/plugins/frontend/getComponents";
+import camelCaseToSpaced from "../../utils/camelToSpaced";
+import DynamicComponentLoader from "../../components/DynamicComponentLoader/DynamicComponentLoader";
 
 const PluginPage: FC = () => {
   const [plugin, setPlugin] = useState<PluginDetails>();
   const [search, setSearch] = useSearchParams();
-  const [tab, setTab] = useState(search.get("tab"));
+  const [tab, setTab] = useState(search.get("tab") ?? "details");
+  const [components, setComponents] = useState<FrontendComponent[]>([]);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -27,7 +34,19 @@ const PluginPage: FC = () => {
 
   useEffect(() => {
     if (id) {
-      getPlugin(id).then(setPlugin).catch(console.error);
+      getPlugin(id)
+        .then((plugin) => {
+          setPlugin(plugin);
+
+          getFrontendComponents("PLUGIN_SETTINGS_TAB", id)
+            .then((components) => {
+              setComponents(
+                components.map((component) => component.frontendComponent)
+              );
+            })
+            .catch(console.error);
+        })
+        .catch(console.error);
     } else {
       toast({
         severity: "error",
@@ -35,6 +54,37 @@ const PluginPage: FC = () => {
       });
     }
   }, [id]);
+
+  const tabs = useMemo(() => {
+    return components.map((component, index) => (
+      <Tab
+        key={index}
+        label={camelCaseToSpaced(component.componentName)}
+        value={component.componentName}
+      />
+    ));
+  }, [components]);
+
+  const tabContent = useMemo(() => {
+    return components.map((component, index) => (
+      <Box key={index} hidden={tab !== component.componentName}>
+        {/* <Suspense fallback={<>...</>}>
+          {lazy(() =>
+            // apiClient
+            //   .get(`/plugins/frontend/${component.id}`)
+            //   .then((res) => res.data)
+            import(
+              `${import.meta.env.VITE_API_URL}/plugins/frontend/${component.id}`
+            ).then((module) => ({ default: module[component.componentName] }))
+          )}
+        </Suspense> */}
+
+        <DynamicComponentLoader
+          url={`${import.meta.env.VITE_API_URL}/plugins/frontend/${component.id}`}
+        />
+      </Box>
+    ));
+  }, [tab, components]);
 
   return (
     <PageContainer title={plugin?.name ?? "Plugin"}>
@@ -52,6 +102,7 @@ const PluginPage: FC = () => {
             {plugin.settingsSchema && (
               <Tab label="Settings" value={"settings"} />
             )}
+            {tabs}
           </Tabs>
 
           <CardContent>
@@ -78,6 +129,7 @@ const PluginPage: FC = () => {
                 <PluginSettingsForm plugin={plugin} setPlugin={setPlugin} />
               </Box>
             )}
+            {tabContent}
           </CardContent>
         </Card>
       ) : (

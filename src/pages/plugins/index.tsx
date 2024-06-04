@@ -18,7 +18,7 @@ const PluginsPage: FC = () => {
 
   useEffect(() => {
     getPlugins().then(setPlugins).catch(console.error);
-  }, [plugins]);
+  }, []);
 
   return (
     <PageContainer title="Plugins">

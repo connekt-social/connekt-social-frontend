@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.16",
     "@mui/material": "^5.15.15",
+    "@paciolan/remote-component": "^2.13.0",
     "@rjsf/core": "^5.18.4",
     "@rjsf/mui": "^5.18.4",
     "@rjsf/utils": "^5.18.4",
@@ -48,6 +49,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "storybook": "^8.0.9",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-plugin-mkcert": "^1.17.5"
   }
 }

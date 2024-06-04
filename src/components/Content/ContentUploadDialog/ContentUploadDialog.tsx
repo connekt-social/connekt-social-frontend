@@ -23,6 +23,7 @@ import {
 import ContentUploadForm from "../ContentUploadForm/ContentUploadForm";
 import ContentDataView from "../ContentDataView/ContentDataView";
 import { uploadContentItem } from "../../../api/content/uploadContentItem";
+import { toast } from "../../../utils/toast";
 
 type Props = {
   open: boolean;
@@ -48,6 +49,12 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
         contentTypeId: contentType?.id,
         data: formData,
       });
+      toast({
+        message: "Content uploaded successfully",
+        severity: "success",
+      });
+
+      setOpen(false);
     } catch (error) {
       console.error(error);
     }
