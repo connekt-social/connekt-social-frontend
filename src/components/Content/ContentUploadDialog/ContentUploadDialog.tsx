@@ -15,38 +15,41 @@ import {
   Typography,
 } from "@mui/material";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import ContentTypeSelector from "../ContentTypeSelector/ContentTypeSelector";
-import {
-  ContentType,
-  getContentTypes,
-} from "../../../api/content/getContentTypes";
+import ContentFormatSelector from "../ContentTypeSelector/ContentTypeSelector";
+
 import ContentUploadForm from "../ContentUploadForm/ContentUploadForm";
 import ContentDataView from "../ContentDataView/ContentDataView";
 import { uploadContentItem } from "../../../api/content/uploadContentItem";
 import { toast } from "../../../utils/toast";
+import {
+  ContentFormat,
+  getContentFormats,
+} from "../../../api/content/getContentFormats";
 
 type Props = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
-  const [contentType, setContentType] = useState<ContentType | null>(null);
+  const [contentFormat, setContentFormat] = useState<ContentFormat | null>(
+    null
+  );
   const [activeStep, setActiveStep] = useState(0);
-  const [contentTypes, setContentTypes] = useState<ContentType[]>([]);
+  const [contentFormats, setContentFormats] = useState<ContentFormat[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [formData, setFormData] = useState<any>({});
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
-    getContentTypes().then(setContentTypes).catch(console.error);
+    getContentFormats().then(setContentFormats).catch(console.error);
   }, []);
 
   const handleUpload = async () => {
-    if (!contentType) return;
+    if (!contentFormat) return;
     setUploading(true);
     try {
       await uploadContentItem({
-        contentTypeId: contentType?.id,
+        contentFormatCode: contentFormat?.code,
         data: formData,
       });
       toast({
@@ -96,7 +99,7 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
           <Stack spacing={4}>
             <Stepper activeStep={activeStep}>
               <Step>
-                <StepLabel>Choose content type</StepLabel>
+                <StepLabel>Choose content format</StepLabel>
               </Step>
               <Step>
                 <StepLabel>Enter details</StepLabel>
@@ -108,13 +111,13 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
             {activeStep === 0 && (
               <Fade in>
                 <Stack spacing={4}>
-                  <Typography variant="h6">Choose content type</Typography>
-                  <ContentTypeSelector
-                    contentTypes={contentTypes}
-                    onContentTypeSelect={(contentType) => {
+                  <Typography variant="h6">Choose content format</Typography>
+                  <ContentFormatSelector
+                    contentFormats={contentFormats}
+                    onContentFormatSelect={(contentType) => {
                       console.log("onContentTypeSelect");
                       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                      setContentType(contentType);
+                      setContentFormat(contentType);
                     }}
                   />
                 </Stack>
@@ -124,11 +127,11 @@ const ContentUploadDialog: FC<Props> = ({ open, setOpen }) => {
               <Fade in>
                 <Stack spacing={4}>
                   <Typography variant="h6">Enter Details</Typography>
-                  {contentType ? (
-                    contentType.schema ? (
+                  {contentFormat ? (
+                    contentFormat.schema ? (
                       <ContentUploadForm
-                        schema={contentType?.schema}
-                        uiSchema={contentType?.uiSchema}
+                        schema={contentFormat?.schema}
+                        uiSchema={contentFormat?.uiSchema}
                         onSubmit={(data) => {
                           console.log("contentUploadForm submitted", data);
                           setFormData(data.formData);

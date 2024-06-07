@@ -80,8 +80,6 @@ const gridPlacementFunction = <
     }
   }
 
-  console.log("matrix", matrix);
-
   return {
     matrix,
     elements: newElements,

@@ -21,7 +21,7 @@ const DynamicGridContainer = <
   const [gridHeight, setGridHeight] = useState(3);
 
   useEffect(() => {
-    const { matrix } = gridPlacementFunction(propList, 3, 4);
+    const { matrix } = gridPlacementFunction(propList, 1, 4);
     console.log(matrix);
     setGridHeight(matrix.length);
   }, [propList]);

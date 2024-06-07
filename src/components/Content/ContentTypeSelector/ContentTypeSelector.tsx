@@ -6,26 +6,28 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import { ContentType } from "../../../api/content/getContentTypes";
+import { ContentFormat } from "../../../api/content/getContentFormats";
 
 type Props = {
-  contentTypes: ContentType[];
-  onContentTypeSelect: (contentType: ContentType) => void;
+  contentFormats: ContentFormat[];
+  onContentFormatSelect: (contentFormat: ContentFormat) => void;
 };
-const ContentTypeSelector: FC<Props> = ({
-  contentTypes,
-  onContentTypeSelect,
+const ContentFormatSelector: FC<Props> = ({
+  contentFormats,
+  onContentFormatSelect,
 }) => {
   return (
     <Grid container spacing={2}>
-      {contentTypes.map((contentType) => (
-        <Grid item key={contentType.id} xs={12} sm={6} md={4}>
+      {contentFormats.map((contentFormat) => (
+        <Grid item key={contentFormat.code} xs={12} sm={6} md={4}>
           <Card>
-            <CardActionArea onClick={() => onContentTypeSelect(contentType)}>
+            <CardActionArea
+              onClick={() => onContentFormatSelect(contentFormat)}
+            >
               <CardContent>
-                <Typography variant="h6">{contentType.name}</Typography>
+                <Typography variant="h6">{contentFormat.name}</Typography>
                 <Typography variant="body1">
-                  {contentType.description}
+                  {contentFormat.description}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -36,4 +38,4 @@ const ContentTypeSelector: FC<Props> = ({
   );
 };
 
-export default ContentTypeSelector;
+export default ContentFormatSelector;
