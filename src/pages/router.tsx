@@ -4,6 +4,7 @@ import LoginPage from "./login";
 import { useContext } from "react";
 import { NavContext } from "../context/NavContext";
 import PluginPage from "./plugins/pluginPage";
+import ContentItemPage from "./content/contentItemPage";
 
 const AppRouter = () => {
   const { routes } = useContext(NavContext);
@@ -20,6 +21,12 @@ const AppRouter = () => {
           path: "/plugins/:id",
           element: <PluginPage />,
         },
+        {
+          path: "/content/:id",
+          element: <ContentItemPage />,
+        },
+
+        //plugin routes
       ],
     },
     {

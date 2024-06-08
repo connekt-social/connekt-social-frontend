@@ -7,9 +7,16 @@ export type ContentType = {
   description: string;
   schema?: RJSFSchema;
   uiSchema?: UiSchema;
+  plugin: {
+    name: string;
+    id: number;
+    version: string;
+  };
 };
-export const getContentTypes = async () => {
-  const response = await apiClient.get<ContentType[]>("/content/types");
+export const getContentTypes = async (code?: string) => {
+  const response = await apiClient.get<ContentType[]>("/content/types", {
+    params: { code },
+  });
 
   return response.data.map((contentType) => ({
     ...contentType,

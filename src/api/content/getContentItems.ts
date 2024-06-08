@@ -17,3 +17,9 @@ export const getContentItems = async () => {
 
   return response.data;
 };
+
+export const getContentItem = async (id: string | number) => {
+  const response = await apiClient.get<ContentItem>(`/content/items/${id}`);
+
+  return response.data;
+};

@@ -3,6 +3,7 @@ import { Settings, SettingsProvider } from "./SettingsContext";
 import ThemeComponent from "../theme/ThemeComponent";
 import CoolSnackbar from "../components/CoolSnackbar/CoolSnackbar";
 import NavProvider from "./NavContext";
+import ConfirmDialog from "../components/ConfirmDialog/ConfirmDialog";
 
 type Props = {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ const MasterProvider: FC<Props> = ({ children, settings }) => {
         <ThemeComponent>
           {children}
           <CoolSnackbar />
+          <ConfirmDialog />
         </ThemeComponent>
       </NavProvider>
     </SettingsProvider>

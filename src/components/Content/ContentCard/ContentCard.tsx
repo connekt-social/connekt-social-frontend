@@ -37,6 +37,7 @@ const ContentCard: FC<ContentCardProps> = ({
   itemType,
   size = "SQUARE",
   sx,
+  itemID,
 }) => {
   const aspectRatio: SxProps = useMemo(() => {
     switch (size) {
@@ -85,7 +86,7 @@ const ContentCard: FC<ContentCardProps> = ({
       >
         <CardActionArea
           LinkComponent={"a"}
-          href="#"
+          href={`/content/${itemID}`}
           sx={{ height: "100%", position: "relative", width: "100%" }}
         >
           <Stack
